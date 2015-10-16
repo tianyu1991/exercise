@@ -27,7 +27,21 @@ fit <- lm(y ~ x)
 summary(fit)
 
 #3 In the mtcars data set, fit a linear regression model of weight (predictor) on mpg (outcome). Get a 95% confidence interval for the expected mpg at the average weight. What is the lower endpoint?
+data(mtcars)
+x<-mtcars$wt
+y<-mtcars$mpg
+fit_c<-lm(y ~ x)
 predict(fit_c,data.frame(x=mean(x)), interval="confidence")
 
 #4 Consider again the mtcars data set and a linear regression model with mpg as predicted by weight (1,000 lbs). A new car is coming weighing 3000 pounds. Construct a 95% prediction interval for its mpg. What is the upper endpoint?
 predict(fit_c,data.frame(x=3), interval="prediction")
+
+#5
+fit_c2<-lm(y~I(x/2))
+co<-summary(fit_c2)$coefficients
+mn<-co[2,1]      #mean is the estimated slope
+std_err<-co[2,2] #standard error
+df<-fit_c2$df    #degree of freedom
+#Two sides T-Tests
+mn + c(-1,1) * qt(0.975,df=deg_fr) * std_err
+
