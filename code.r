@@ -45,3 +45,15 @@ df<-fit_c2$df    #degree of freedom
 #Two sides T-Tests
 mn + c(-1,1) * qt(0.975,df=deg_fr) * std_err
 
+#QUIZ3
+#1 Consider the mtcars data set. Fit a model with mpg as the outcome that includes number of cylinders as a factor variable and weight as confounder. Give the adjusted estimate for the expected change in mpg comparing 8 cylinders to 4.
+y<-mtcars$mpg
+ x1<-mtcars$cyl
+ x2<-mtcars$wt
+ (8-4)*summary(lm(y~x1+x2))$coef[2, 1]
+ 
+ mtcars$cyl <- factor(mtcars$cyl)
+ fit <- lm(mpg ~ cyl + wt, mtcars)
+summary(fit)$coef[3, 1]
+
+
