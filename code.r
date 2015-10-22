@@ -56,4 +56,21 @@ y<-mtcars$mpg
  fit <- lm(mpg ~ cyl + wt, mtcars)
 summary(fit)$coef[3, 1]
 
+#3
+data(mtacrs)
+mtcars$cyl<-factor(mtcars$cyl)
+fit1<-lm(mpg~cyl+wt,mtcars)
+fit2<-lm(mpg~cyl+wt+cyl*wt,mtcars)
+r1<-summary(fit1)$adj.r.squared
+r2<-summary(fit2)$adj.r.squared
+lrtest(f1,f2)
+
+#5 Give the hat diagonal for the most influential point
+fit<-lm(y~x)
+hatvalues(fit)
+
+#6 Give the slope dfbeta for the point with the highest hat value.
+influence.measures(fit)$infmat[5, 'dfb.x']
+dfbetas(fit)
+
 
